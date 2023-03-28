@@ -1,5 +1,5 @@
 
-public class arcos {
+public class functions {
 
     public static double semifactorial(int x) throws Error {
         if (x < 0)
@@ -84,6 +84,8 @@ public class arcos {
         return result;
     }
 
+
+//AB^x
     public static double exponential(double a, double b, double x) throws Error {
         Double result = 0.0;
 
