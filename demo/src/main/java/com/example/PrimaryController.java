@@ -29,6 +29,15 @@ public class PrimaryController {
             case "+":
                 calculateAddition();
                 break;
+            case "-":
+                calculateSubtraction();
+                break;
+            case "x":
+                calculateMultiplication();
+                break;
+            case "/":
+                calculateDivision();
+                break;
             default:
                 break;
         }
@@ -74,6 +83,24 @@ public class PrimaryController {
     private void calculateAddition() {
         double result = Double.parseDouble(firstValue) + Double.parseDouble(secondValue);
         currentText.setText(firstValue + " + " + secondValue + " = " + result);
+        inputTextField.setText(String.valueOf(result));
+    }
+
+    private void calculateSubtraction() {
+        double result = Double.parseDouble(firstValue) - Double.parseDouble(secondValue);
+        currentText.setText(firstValue + " - " + secondValue + " = " + result);
+        inputTextField.setText(String.valueOf(result));
+    }
+
+    private void calculateMultiplication() {
+        double result = Double.parseDouble(firstValue) * Double.parseDouble(secondValue);
+        currentText.setText(firstValue + " x " + secondValue + " = " + result);
+        inputTextField.setText(String.valueOf(result));
+    }
+
+    private void calculateDivision() {
+        double result = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
+        currentText.setText(firstValue + " / " + secondValue + " = " + result);
         inputTextField.setText(String.valueOf(result));
     }
 
