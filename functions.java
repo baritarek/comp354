@@ -100,6 +100,10 @@ public class functions {
             return result;
     }
 
+    public static double sinh(double x) {
+        return (natural_exponential(x) - natural_exponential(-x)) / 2.0;
+    }
+
     public static void main(String[] args) {
         System.out.println("hellooo ");
         System.out.println(arccosine(0.4));
