@@ -6,6 +6,9 @@ import io.github.mrrefactoring.Fraction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class PrimaryController {
@@ -14,33 +17,49 @@ public class PrimaryController {
     private TextField inputTextField;
     @FXML
     private Text currentText;
+    @FXML
+    private VBox vbox;
 
     // x + y, 'x' is firstValue, 'y' is secondValue, '+' is operation
     private String firstValue = "";
     private String secondValue = "";
     private String operation;
 
+    private Boolean shiftPressed = false;
+
+
     @FXML
     private void handleCalculateButtonAction(ActionEvent event) {
-        switch (operation) {
-            case "^":
-                calculateExponent();
-                break;
-            case "+":
-                calculateAddition();
-                break;
-            case "-":
-                calculateSubtraction();
-                break;
-            case "x":
-                calculateMultiplication();
-                break;
-            case "/":
-                calculateDivision();
-                break;
-            default:
-                break;
+        
+        try {
+            switch (operation) {
+                case "^":
+                    calculateExponent();
+                    break;
+                case "+":
+                    calculateAddition();
+                    break;
+                case "-":
+                    calculateSubtraction();
+                    break;
+                case "*":
+                    calculateMultiplication();
+                    break;
+                case "/":
+                    calculateDivision();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            firstValue = "";
+            secondValue = "";
+            operation = "";
+            currentText.setText("");
+            inputTextField.setText("ERROR");
+            System.out.println("DEBUG: handleCalculateButtonAction Exception");
         }
+        cursorToEnd();
     }
 
     private void buildOperation(String operation) {
@@ -56,28 +75,33 @@ public class PrimaryController {
     }
 
     @FXML
-    private void handleExponentButtonAction(ActionEvent event) throws IOException {
+    void handleExponentButtonAction(ActionEvent event) {
         buildOperation("^");
+        cursorToEnd();
     }
 
     @FXML
-    private void handleMultButtonAction(ActionEvent event) throws IOException {
-        buildOperation("x");
+    void handleMultButtonAction(ActionEvent event) {
+        buildOperation("*");
+        cursorToEnd();
     }
 
     @FXML
-    private void handleDivisionButtonAction(ActionEvent event) throws IOException {
+    void handleDivisionButtonAction(ActionEvent event) {
         buildOperation("/");
+        cursorToEnd();
     }
 
     @FXML
-    private void handleAddButtonAction(ActionEvent event) throws IOException {
+    void handleAddButtonAction(ActionEvent event) {
         buildOperation("+");
+        cursorToEnd();
     }
 
     @FXML
-    private void handleSubButtonAction(ActionEvent event) throws IOException {
+    void handleSubButtonAction(ActionEvent event) {
         buildOperation("-");
+        cursorToEnd();
     }
 
     private void calculateAddition() {
@@ -94,7 +118,7 @@ public class PrimaryController {
 
     private void calculateMultiplication() {
         double result = Double.parseDouble(firstValue) * Double.parseDouble(secondValue);
-        currentText.setText(firstValue + " x " + secondValue + " = " + result);
+        currentText.setText(firstValue + " * " + secondValue + " = " + result);
         inputTextField.setText(String.valueOf(result));
     }
 
@@ -105,46 +129,6 @@ public class PrimaryController {
     }
 
     private void calculateExponent() {
-        // String query = inputTextField.getText();
-
-        // int indexOfExp = query.indexOf("^");
-        // double x = Double.parseDouble(query.substring(0, indexOfExp));
-        // double y = Double.parseDouble(query.substring(indexOfExp));
-
-        // if (y == 0.0) {
-
-        //     inputTextField.setText("1.0");
-        //     return;
-        // }
-
-        // double result = 1.0;
-        // double absExponent = y < 0 ? -y : y;
-        // String numString = String.valueOf(y);
-        // int indexOfDecimal = numString.indexOf(".");
-        // double decimal = Double.parseDouble(numString.substring(indexOfDecimal));
-        // System.out.println("DEBUG: decimal part " + decimal);
-
-        // for (int i = 1; i <= absExponent; i++) {
-        //     result *= x;
-        // }
-
-        // if (decimal != 0.0) {
-        //     try {
-        //     Fraction frac = new Fraction(x);
-        //     System.out.println("DEBUG: fraction " + frac.toFraction());
-        //     System.out.println("DEBUG: power with fraction " + frac.pow(decimal));
-        //     result *= frac.pow(decimal).toDecimal();
-        //     } catch (Exception e) {
-        //     System.out.println("ERROR - DIVISION BY ZERO");
-        //     System.exit(0);
-        //     }
-
-        // }
-
-        // if (y < 0.0) {
-        //     result = 1.0 / result;
-        // }
-
         double x = Double.parseDouble(firstValue);
         double y = Double.parseDouble(secondValue);
 
@@ -191,51 +175,142 @@ public class PrimaryController {
     @FXML
     void handleButton0Action(ActionEvent event) {
         appendNumber("0");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton1Action(ActionEvent event) {
         appendNumber("1");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton2Action(ActionEvent event) {
         appendNumber("2");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton3Action(ActionEvent event) {
         appendNumber("3");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton4Action(ActionEvent event) {
         appendNumber("4");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton5Action(ActionEvent event) {
         appendNumber("5");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton6Action(ActionEvent event) {
         appendNumber("6");
+        vbox.requestFocus();
+        cursorToEnd();
     }
 
     @FXML
     void handleButton7Action(ActionEvent event) {
         appendNumber("7");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton8Action(ActionEvent event) {
         appendNumber("8");
+        cursorToEnd();
     }
 
     @FXML
     void handleButton9Action(ActionEvent event) {
         appendNumber("9");
+        cursorToEnd();
     }
+
+    void reset(){
+        firstValue = "";
+        secondValue = "";
+        operation = "";
+        inputTextField.setText("");
+    }
+
+    public void cursorToEnd(){
+        vbox.requestFocus();
+        inputTextField.positionCaret(inputTextField.getLength());
+    }
+
+    public void checkKeyPresses(KeyCode code){
+            System.out.println("check" + code.getName());
+            switch (code) {
+                case DIGIT0:
+                    handleButton0Action(null);
+                    break;
+                case DIGIT1:
+                    handleButton1Action(null);
+                    break;
+                case DIGIT2:
+                    handleButton2Action(null);
+                    break;
+                case DIGIT3:
+                    handleButton3Action(null);
+                    break;
+                case DIGIT4:
+                    handleButton4Action(null);
+                    break;
+                case DIGIT5:
+                    handleButton5Action(null);
+                    break;
+                case DIGIT6:
+                    if (shiftPressed)
+                        handleExponentButtonAction(null);
+                    else
+                        handleButton6Action(null);
+                    break;
+                case DIGIT7:
+                    handleButton7Action(null);
+                    break;
+                case DIGIT8:
+                    handleButton8Action(null);
+                    break;
+                case DIGIT9:
+                    handleButton9Action(null);
+                    break;
+                case EQUALS:
+                    if (shiftPressed == true)
+                        handleAddButtonAction(null);
+                    break;
+                case MINUS:
+                    handleSubButtonAction(null);
+                    break;
+                case MULTIPLY:
+                    handleMultButtonAction(null);
+                    break;
+                case SLASH:
+                    handleDivisionButtonAction(null);
+                    break;
+                case SHIFT:
+                    setShiftPressed(true);
+                    break;
+                case ESCAPE:
+                    reset();
+                    break;
+                case ENTER:
+                    handleCalculateButtonAction(null);
+                    break;
+                default:
+                    break;
+            };
+    }
+    
+    void setShiftPressed(Boolean value){
+        shiftPressed = value;
+    }
+
 
 }
