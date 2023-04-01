@@ -7,14 +7,25 @@ public class Standard_Deviation {
 
 	}
 	
-	public static double standardDeviation(double avg, double[] values) {
+	public static double standardDeviation(double[] values) {
 		double result = 0;
+		double avg = average(values);
 		for(int i = 0; i < values.length; i++) {
 			result += (values[i]-avg)*(values[i]-avg);
 		}
 		result = squareRoot(result)/values.length;
 		return result;
 	}
+	
+	
+	public static double average(double[] x) {
+		double sum = 0;
+		for(int i = 0; i < x.length; i++) {
+			sum += x[i];
+		}
+		return sum/x.length;
+	}
+	
 	
 	
 	public static double squareRoot(double x) {
