@@ -34,7 +34,9 @@ public class PrimaryController {
         try {
             switch (operation) {
                 case "^":
-                    calculateExponent();
+                    double result = Functions.power(Double.parseDouble(firstValue), Double.parseDouble(secondValue));
+                    currentText.setText(firstValue + " ^ " + secondValue + " = ");
+                    inputTextField.setText(String.valueOf(result));
                     break;
                 case "+":
                     calculateAddition();
@@ -125,50 +127,6 @@ public class PrimaryController {
     private void calculateDivision() {
         double result = Double.parseDouble(firstValue) / Double.parseDouble(secondValue);
         currentText.setText(firstValue + " / " + secondValue + " = " + result);
-        inputTextField.setText(String.valueOf(result));
-    }
-
-    private void calculateExponent() {
-        double x = Double.parseDouble(firstValue);
-        double y = Double.parseDouble(secondValue);
-
-        System.out.println("DEBUG: exponent x " + x);
-        System.out.println("DEBUG: exponent y " + y);
-
-        if (y == 0.0) {
-            inputTextField.setText("1.0");
-            return;
-        }
-
-        double result = 1.0;
-        double absExponent = y < 0 ? -y : y;
-        String numString = String.valueOf(y);
-        int indexOfDecimal = numString.indexOf(".");
-        double decimal = Double.parseDouble(numString.substring(indexOfDecimal));
-        System.out.println("DEBUG: decimal part " + decimal);
-
-        for (int i = 1; i <= absExponent; i++) {
-            result *= x;
-        }
-
-        if (decimal != 0.0) {
-            try {
-            Fraction frac = new Fraction(x);
-            System.out.println("DEBUG: fraction " + frac.toFraction());
-            System.out.println("DEBUG: power with fraction " + frac.pow(decimal));
-            result *= frac.pow(decimal).toDecimal();
-            } catch (Exception e) {
-            System.out.println("ERROR - DIVISION BY ZERO");
-            System.exit(0);
-            }
-
-        }
-
-        if (y < 0.0) {
-            result = 1.0 / result;
-        }
-
-        currentText.setText(firstValue + " ^ " + secondValue + " = ");
         inputTextField.setText(String.valueOf(result));
     }
 
