@@ -3,10 +3,16 @@ package com.example;
 public class Functions {
 	public static final double E = 2.7182818284590452354;
 	public static final double PI = 3.14159265358979323846;
-	private static final double DEGREES_TO_RADIANS = 0.017453292519943295;
-	private static final double RADIANS_TO_DEGREES = 57.29577951308232;
-	
-	//Matt stdev	
+
+	// not depreacted but not used
+	// @Deprecated
+	// private static final double DEGREES_TO_RADIANS = 0.017453292519943295;
+	//private static final double RADIANS_TO_DEGREES = 57.29577951308232;
+
+	public static void main(String[] args) {
+		//
+	}
+	//Matt stdev
 	public static double standardDeviation(double[] values) {
 		double result = 0;
 		double avg = average(values);
@@ -16,7 +22,7 @@ public class Functions {
 		result = squareRoot(result/values.length);
 		return result;
 	}
-	
+
 	public static double average(double[] x) {
 		double sum = 0;
 		for(int i = 0; i < x.length; i++) {
@@ -24,7 +30,7 @@ public class Functions {
 		}
 		return sum/x.length;
 	}
-		
+
 	public static double squareRoot(double x) {
 		double val = x/2;
 		double newVal;
@@ -44,7 +50,7 @@ public class Functions {
 			return x;
 		}
 	}
-	
+
 	public static int factorial(int x) {
 		int result = 1;
 		for(int i = 1; i <= x; i++) {
@@ -54,9 +60,9 @@ public class Functions {
 	}
 
 	//Tarek log
-	public static double log(double x, double base) throws Error {
+	public static double log(double x, double base) throws IllegalArgumentException {
 	    if (x <= 0 || base <= 0 || base == 1)
-	        throw new Error();
+	        throw new IllegalArgumentException();
 	    return ln(x) / ln(base);
 	}
 
@@ -79,11 +85,9 @@ public class Functions {
 	public static double log(double x) throws Error {
 	    return log(x, 10);
 	}
-	
+
 	//Emamnuel x^y
 	public static double power(double x, double y) {
-		System.out.println("DEBUG: exponent x " + x);
-        System.out.println("DEBUG: exponent y " + y);
 		double integer = absVal((int)y);
 		double decimal = absVal(y) - integer;
 		double decimalresult = 0;
@@ -102,11 +106,11 @@ public class Functions {
 		}
 		return result;
 	}
-	
+
 	//Ahmed arccos
-	public static double semifactorial(int x) throws Error {
+	public static double semifactorial(int x) throws IllegalArgumentException {
         if (x < 0)
-            throw new Error("MATH ERROR");
+            throw new IllegalArgumentException("Expression cant be less than zero");
 
         int result = 1;
         while (x > 0) {
@@ -116,10 +120,10 @@ public class Functions {
         return result;
     }
 
-    public static double arccosine(double x) throws Error {
+    public static double arccosine(double x) throws IllegalArgumentException {
         if (x < -1 || x > 1)
-            throw new Error("MATH ERROR");
-        
+		//try to specify the error , rather than using a generic error
+           throw new IllegalArgumentException("Expression cant be less than zero");
         if (x == 0)
             return PI/2;
         else if (x == 1)
@@ -138,7 +142,7 @@ public class Functions {
         return (PI/2 - result);
 
     }
-    
+
 	//Sam
 	public static double MAD(double[] numbers) {
         double mean = average(numbers);
@@ -149,15 +153,15 @@ public class Functions {
         double mad = average(deviations);
         return mad;
     }
-	
+
 	//Ethan
 	public static double sinh(double x) {
 	  return (power(E,x) - power(E,-x)) / 2.0;
 	}
-	
-	//Hira 
+
+	//Hira
 	public static double exponential(double a, double x, double y) {
 		return a*power(x,y);
 	}
-	
 }
+

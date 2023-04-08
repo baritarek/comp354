@@ -30,7 +30,7 @@ public class PrimaryController {
 
     @FXML
     private void handleCalculateButtonAction(ActionEvent event) {
-        
+
         try {
             switch (operation) {
                 case "^":
@@ -265,7 +265,8 @@ public class PrimaryController {
                     break;
             };
     }
-    
+
+    //we can set the function to a Boolean rather than void no?
     void setShiftPressed(Boolean value){
         shiftPressed = value;
     }
